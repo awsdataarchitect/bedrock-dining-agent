@@ -136,6 +136,15 @@ aws bedrock-agentcore-control update-agent-runtime \
 agentcore invoke '{"prompt": "Find restaurants in Toronto"}'
 ```
 
+### Testing Cloud Deployment with Frontend
+To test the deployed AgentCore runtime with your local frontend:
+
+```bash
+python cloud_proxy.py &
+```
+
+This starts a proxy server on port 8081 that connects your local frontend to the deployed AgentCore runtime, enabling seamless local-to-cloud testing.
+
 ### ⚠️ Critical Cloud Setup
 Environment variables MUST be set at the AgentCore runtime level, NOT in YAML config:
 
@@ -209,7 +218,7 @@ aws bedrock-agentcore-control get-agent-runtime --agent-runtime-id YOUR_AGENT_ID
 
 **Why This Matters**: AgentCore has separate deployment and runtime configuration layers. The YAML file handles deployment settings, but runtime environment variables require a separate AWS CLI call to the runtime API.
 
-## 🚀 Running the Application (ALWAYS IN BACKGROUND)
+## 🚀 Running the Application 
 
 ### Prerequisites
 ```bash
@@ -218,6 +227,7 @@ cp .env.example .env
 # Edit .env with your actual BrightData API token
 
 # Install Python dependencies
+source .venv/bin/activate
 pip install -r requirements.txt
 
 # Install frontend dependencies
@@ -231,7 +241,7 @@ npm install
 pkill -f "python app.py"
 
 # Start local backend in background (port 8080)
-cd agentcore
+cd bedrock-dining-agent
 source .venv/bin/activate
 python app.py &  # CRITICAL: Always use & for background
 ```
@@ -298,7 +308,7 @@ curl -X POST http://localhost:8080/invocations \
 3. **create_dining_plan**: Smart dining plan creation with auto-menu discovery
 
 ### Tool Usage Flow
-1. **"Find restaurants"** → `search_engine` → Returns 10 search results
+1. **"Find restaurants"** → `search_engine` → Returns search results
 2. **"Dining plan for [restaurant]"** → `create_dining_plan` → Auto-finds menu URL → Scrapes menu → Creates plan
 
 ## 🔄 **ENDPOINT SWITCHING (PLUG & PLAY)**
@@ -309,13 +319,11 @@ The frontend supports seamless switching between local and cloud endpoints:
 ```bash
 # Frontend .env file
 REACT_APP_API_URL=http://localhost:8080
-REACT_APP_USE_CLOUD=false
 ```
 
 ### **Cloud AgentCore Runtime**
 ```bash
 # Frontend .env file  
-REACT_APP_USE_CLOUD=true
 REACT_APP_AGENT_ARN=arn:aws:bedrock-agentcore:us-east-1:YOUR_ACCOUNT_ID:runtime/app-XXXXXXXXXX
 ```
 
