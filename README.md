@@ -12,7 +12,7 @@ A sophisticated AI dining assistant built with Amazon Bedrock AgentCore, featuri
 
 ### 1. Clone & Setup
 ```bash
-git clone <repository-url>
+git clone https://github.com/awsdataarchitect/bedrock-dining-agent
 cd agentcore
 
 # Setup Python environment
