@@ -10,7 +10,7 @@ import {
 } from '../types';
 
 const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080';
-const AGENT_ARN = process.env.REACT_APP_AGENT_ARN || 'arn:aws:bedrock-agentcore:us-east-1:283023040015:runtime/app-AheaYU90JX';
+const AGENT_ARN = process.env.REACT_APP_AGENT_ARN;
 
 class ApiService {
   private useCloud = false;
