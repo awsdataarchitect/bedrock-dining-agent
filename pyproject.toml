@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bedrock-dining-agent"
+version = "1.0.0"
+description = "Bedrock Dining Agent using AgentCore and Strands"
+authors = [{name = "AgentCore Team", email = "team@company.com"}]
+license = {text = "MIT"}
+readme = "README.md"
+requires-python = ">=3.11"
+
+dependencies = [
+    "bedrock-agentcore>=0.1.1",
+    "strands-agents>=0.1.1",
+    "boto3>=1.39.7",
+    "botocore>=1.39.7",
+    "pydantic>=2.0.0",
+    "fastapi>=0.104.0",
+    "uvicorn>=0.24.0",
+    "requests>=2.32.0",
+    "python-dotenv>=1.0.0",
+]
+
+[project.scripts]
+dining-agent = "app:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["*"]
