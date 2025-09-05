@@ -1,0 +1,5 @@
+# Environment variables
+.env
+
+# AgentCore generated configuration
+.bedrock_agentcore.yaml
